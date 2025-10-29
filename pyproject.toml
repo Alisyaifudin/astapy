@@ -1,0 +1,28 @@
+[project]
+name = "astapy"
+version = "0.1.0"
+description = "Python wrapper around the ASTAP CLI"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [
+  { name = "Muhammad Ali Syaifudi", email = "syaifudin.ali.muhammad@gmail.com" },
+]
+dependencies = []
+keywords = [
+  "astap",
+  "plate solver",
+  "alignment",
+  "wrapper",
+  "astronomy",
+  "astrometry",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
