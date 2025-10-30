@@ -1,5 +1,6 @@
-from .astapy import Astapy
-from .angle import Angle, UNIT, SIGN
+"""The astapy lib"""
+from .astapy import Astapy, config
+from .angle import Angle
 from .wcs import Card, Comment
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"

@@ -1,8 +1,10 @@
+"""Utility module to printout stream to stdout"""
 import sys
 import subprocess
 import time
 
 def stream_cmd(cmd, log: bool):
+    '''stream cmd stdout to python stdout'''
     print("Running:", " ".join(cmd))
 
     process = subprocess.Popen(
@@ -12,7 +14,9 @@ def stream_cmd(cmd, log: bool):
         text=True,
         bufsize=1,
     )
-    output = ""
+    stdout = process.stdout
+    if stdout is None:
+        raise IOError("No stdout")
     if log:
         try:
             while process.poll() is None:  # process still running
@@ -20,7 +24,7 @@ def stream_cmd(cmd, log: bool):
                 chunk = ""
                 start = time.time()
                 while True:
-                    b = process.stdout.read(1)
+                    b = stdout.read(1)
                     chunk += b
                     if chunk == "":
                         break
@@ -29,15 +33,11 @@ def stream_cmd(cmd, log: bool):
                         break
                 sys.stdout.write(chunk)
                 sys.stdout.flush()
-                output+=chunk
 
-            remainder = process.stdout.read()
+            remainder = stdout.read()
             if remainder:
                 print(remainder, end="", flush=True)
         except KeyboardInterrupt:
             print("Interrupted by user, terminating ASTAP...")
             process.terminate()
             raise
-    else:
-        output = process.stdout.read()
-    return output[-1024:]
